@@ -80,7 +80,12 @@ val fontFamily
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             ),
-            subtitle2 = subtitle2.copy(fontFamily = fontFamily),
+            subtitle2 = subtitle2.copy(
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                color = Color(0xFF9A70E2),
+            ),
             body1 = body1.copy(fontFamily = fontFamily),
             body2 = body2.copy(fontFamily = fontFamily),
             button = button.copy(

@@ -4,6 +4,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -47,6 +48,8 @@ import cheongha_landing.composeapp.generated.resources.apple_logo_svgrepo_com
 import cheongha_landing.composeapp.generated.resources.filter_screen
 import cheongha_landing.composeapp.generated.resources.home_screen
 import cheongha_landing.composeapp.generated.resources.playstore_svgrepo_com
+import cheongha_landing.composeapp.generated.resources.post_category
+import cheongha_landing.composeapp.generated.resources.post_detail
 import cheongha_landing.composeapp.generated.resources.service_logo
 import kotlinx.browser.window
 import org.jetbrains.compose.resources.painterResource
@@ -179,7 +182,63 @@ private fun Content(
     Spacer(modifier.height(171.dp))
     Column(modifier = modifier.fillMaxWidth().padding(start = 130.dp)) {
         HomeDescription(fontFamily, modifier)
-        Spacer(modifier.height(48.dp))
+        Spacer(modifier.height(155.dp))
+        Text("커뮤니티", style = fontFamily.subtitle1)
+        Spacer(modifier = modifier.height(32.dp))
+        Text(
+            text = "나와 같은 청년들과 함께", style = fontFamily.h2
+        )
+        Spacer(modifier.height(75.dp))
+        Text(
+            text = "다양한 정보 공유", style = fontFamily.subtitle2
+        )
+        Spacer(modifier.height(18.dp))
+        Text(
+            text = "청년정책의 다양한 정보와 이야기를\n" +
+                    "우리 청년들과 자유롭게 나눠보세요.",
+            style = fontFamily.overline,
+        )
+        Spacer(modifier.height(23.dp))
+        Box(modifier = modifier.fillMaxWidth()) {
+            Canvas(
+                modifier = modifier.padding(top = 187.dp, start = 145.dp)
+                    .blur(59.dp, BlurredEdgeTreatment.Unbounded)
+                    .size(473.dp),
+                onDraw = {
+                    drawCircle(
+                        Brush.verticalGradient(
+                            listOf(
+                                Color(0xCC9A70E2),
+                                Color(0x999C79E3),
+                                Color(0x66A495E8),
+                            ),
+                        ),
+                    )
+                }
+            )
+            Image(
+                contentScale = ContentScale.Crop,
+                modifier = modifier.width(417.dp).offset(x = (-15).dp, y = (-8).dp),
+                painter = painterResource(Res.drawable.post_detail),
+                contentDescription = ""
+            )
+            Column(modifier.align(Alignment.BottomEnd).offset(y = 108.dp)) {
+                Text(
+                    textAlign = TextAlign.End,
+                    modifier = modifier.padding(end = 129.dp),
+                    text = "자유 / 정보 / 질문 / 생활 / 취미 / 경제로 나누어져\n보다 쉽게 정보를 찾고 공유할 수 있어요.",
+                    style = fontFamily.overline
+                )
+                Spacer(modifier.height(37.dp))
+                Image(
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier.width(600.dp).padding(end = 133.dp),
+                    painter = painterResource(Res.drawable.post_category),
+                    contentDescription = "",
+                )
+            }
+        }
+        Spacer(modifier = modifier.height(239.dp))
     }
 }
 

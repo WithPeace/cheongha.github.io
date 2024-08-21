@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -67,6 +68,7 @@ fun App() {
         val scrollState = rememberScrollState()
         Column(
             modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Intro(screenWidth = screenWidth, screenHeight = screenHeight)
             Content()
@@ -178,68 +180,71 @@ private fun Intro(
 private fun Content(
     modifier: Modifier = Modifier
 ) {
-    Introduce(modifier)
-    Spacer(modifier.height(171.dp))
-    Column(modifier = modifier.fillMaxWidth().padding(start = 130.dp)) {
-        HomeDescription(fontFamily, modifier)
-        Spacer(modifier.height(155.dp))
-        Text("커뮤니티", style = fontFamily.subtitle1)
-        Spacer(modifier = modifier.height(32.dp))
-        Text(
-            text = "나와 같은 청년들과 함께", style = fontFamily.h2
-        )
-        Spacer(modifier.height(75.dp))
-        Text(
-            text = "다양한 정보 공유", style = fontFamily.subtitle2
-        )
-        Spacer(modifier.height(18.dp))
-        Text(
-            text = "청년정책의 다양한 정보와 이야기를\n" +
-                    "우리 청년들과 자유롭게 나눠보세요.",
-            style = fontFamily.overline,
-        )
-        Spacer(modifier.height(23.dp))
-        Box(modifier = modifier.fillMaxWidth()) {
-            Canvas(
-                modifier = modifier.padding(top = 187.dp, start = 145.dp)
-                    .blur(59.dp, BlurredEdgeTreatment.Unbounded)
-                    .size(473.dp),
-                onDraw = {
-                    drawCircle(
-                        Brush.verticalGradient(
-                            listOf(
-                                Color(0xCC9A70E2),
-                                Color(0x999C79E3),
-                                Color(0x66A495E8),
+    Column(modifier = modifier.widthIn(0.dp, 1440.dp)) {
+        Introduce(modifier)
+        Spacer(modifier.height(171.dp))
+        Column(modifier = modifier.fillMaxWidth().padding(start = 130.dp)) {
+            HomeDescription(fontFamily, modifier)
+            Spacer(modifier.height(155.dp))
+            Text("커뮤니티", style = fontFamily.subtitle1)
+            Spacer(modifier = modifier.height(32.dp))
+            Text(
+                text = "나와 같은 청년들과 함께", style = fontFamily.h2
+            )
+            Spacer(modifier.height(75.dp))
+            Text(
+                text = "다양한 정보 공유", style = fontFamily.subtitle2
+            )
+            Spacer(modifier.height(18.dp))
+            Text(
+                text = "청년정책의 다양한 정보와 이야기를\n" +
+                        "우리 청년들과 자유롭게 나눠보세요.",
+                style = fontFamily.overline,
+            )
+            Spacer(modifier.height(23.dp))
+            Box(modifier = modifier.fillMaxWidth()) {
+                Canvas(
+                    modifier = modifier.padding(top = 187.dp, start = 145.dp)
+                        .blur(59.dp, BlurredEdgeTreatment.Unbounded)
+                        .size(473.dp),
+                    onDraw = {
+                        drawCircle(
+                            Brush.verticalGradient(
+                                listOf(
+                                    Color(0xCC9A70E2),
+                                    Color(0x999C79E3),
+                                    Color(0x66A495E8),
+                                ),
                             ),
-                        ),
-                    )
-                }
-            )
-            Image(
-                contentScale = ContentScale.Crop,
-                modifier = modifier.width(417.dp).offset(x = (-15).dp, y = (-8).dp),
-                painter = painterResource(Res.drawable.post_detail),
-                contentDescription = ""
-            )
-            Column(modifier.align(Alignment.BottomEnd).offset(y = 108.dp)) {
-                Text(
-                    textAlign = TextAlign.End,
-                    modifier = modifier.padding(end = 129.dp),
-                    text = "자유 / 정보 / 질문 / 생활 / 취미 / 경제로 나누어져\n보다 쉽게 정보를 찾고 공유할 수 있어요.",
-                    style = fontFamily.overline
+                        )
+                    }
                 )
-                Spacer(modifier.height(37.dp))
                 Image(
                     contentScale = ContentScale.Crop,
-                    modifier = modifier.width(600.dp).padding(end = 133.dp),
-                    painter = painterResource(Res.drawable.post_category),
-                    contentDescription = "",
+                    modifier = modifier.width(417.dp).offset(x = (-15).dp, y = (-8).dp),
+                    painter = painterResource(Res.drawable.post_detail),
+                    contentDescription = ""
                 )
+                Column(modifier.align(Alignment.BottomEnd).offset(y = 108.dp)) {
+                    Text(
+                        textAlign = TextAlign.End,
+                        modifier = modifier.padding(end = 129.dp),
+                        text = "자유 / 정보 / 질문 / 생활 / 취미 / 경제로 나누어져\n보다 쉽게 정보를 찾고 공유할 수 있어요.",
+                        style = fontFamily.overline
+                    )
+                    Spacer(modifier.height(37.dp))
+                    Image(
+                        contentScale = ContentScale.Crop,
+                        modifier = modifier.width(600.dp).padding(end = 133.dp),
+                        painter = painterResource(Res.drawable.post_category),
+                        contentDescription = "",
+                    )
+                }
             }
+            Spacer(modifier = modifier.height(239.dp))
         }
-        Spacer(modifier = modifier.height(239.dp))
     }
+
 }
 
 @Composable

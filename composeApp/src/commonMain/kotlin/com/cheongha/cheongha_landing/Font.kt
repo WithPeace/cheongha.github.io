@@ -63,12 +63,23 @@ val fontFamily
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF9A70E2),
             ),
-            h2 = h2.copy(fontFamily = fontFamily),
+            h2 = h2.copy(
+                lineHeight = 52.17.sp,
+                fontSize = 40.sp,
+                fontFamily = fontFamily,
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black,
+            ),
             h3 = h3.copy(fontFamily = fontFamily),
             h4 = h4.copy(fontFamily = fontFamily),
             h5 = h5.copy(fontFamily = fontFamily),
             h6 = h6.copy(fontFamily = fontFamily),
-            subtitle1 = subtitle1.copy(fontFamily = fontFamily),
+            subtitle1 = subtitle1.copy(
+                fontFamily = fontFamily,
+                color = Color(0xFF9A70E2),
+                fontWeight = FontWeight.Bold,
+                fontSize = 24.sp,
+            ),
             subtitle2 = subtitle2.copy(fontFamily = fontFamily),
             body1 = body1.copy(fontFamily = fontFamily),
             body2 = body2.copy(fontFamily = fontFamily),
@@ -79,7 +90,19 @@ val fontFamily
                 fontSize = 16.sp,
                 letterSpacing = 0.sp,
             ),
-            caption = caption.copy(fontFamily = fontFamily),
-            overline = overline
+            caption = caption.copy(
+                fontFamily = fontFamily,
+                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                fontSize = 26.sp,
+                lineHeight = 34.sp
+            ),
+            overline = overline.copy(
+                fontFamily = fontFamily,
+                color = Color.Black,
+                fontWeight = FontWeight.Medium,
+                fontSize = 20.sp,
+                lineHeight = 26.5.sp
+            )
         )
     }

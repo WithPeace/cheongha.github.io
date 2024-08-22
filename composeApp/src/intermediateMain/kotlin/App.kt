@@ -1,6 +1,5 @@
-package com.cheongha.cheongha_landing
-
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,12 +41,15 @@ import cheongha_landing.composeapp.generated.resources.home_screen
 import cheongha_landing.composeapp.generated.resources.playstore_svgrepo_com
 import cheongha_landing.composeapp.generated.resources.post_screen
 import cheongha_landing.composeapp.generated.resources.service_logo
-import kotlinx.browser.window
+import com.cheongha.cheongha_landing.fontFamilyMobile
 import org.jetbrains.compose.resources.painterResource
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun App() {
+fun App(
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
+) {
     MaterialTheme {
         val screenWidth = with(LocalDensity.current) {
             LocalWindowInfo.current.containerSize.width.toDp()
@@ -57,18 +59,47 @@ fun App() {
         }
         val scrollState = rememberScrollState()
         if (screenWidth >= 600.dp) {
-            LandingForWeb(scrollState, screenWidth, screenHeight)
+            LandingForWeb(
+                scrollState, screenWidth, screenHeight,
+                onPlayStoreClick = onPlayStoreClick, onAppStoreClick = onAppStoreClick
+            )
         } else {
-            Column(
-                modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Intro(screenWidth = screenWidth, screenHeight = screenHeight)
-                Content()
-                Outro(screenWidth = screenWidth, screenHeight = screenHeight)
-            }
+            LandingForMobile(
+                scrollState,
+                screenWidth,
+                screenHeight,
+                onPlayStoreClick = onPlayStoreClick,
+                onAppStoreClick = onAppStoreClick
+            )
         }
+    }
+}
 
+@Composable
+private fun LandingForMobile(
+    scrollState: ScrollState,
+    screenWidth: Dp,
+    screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Intro(
+            screenWidth = screenWidth,
+            screenHeight = screenHeight,
+            onPlayStoreClick = onPlayStoreClick,
+            onAppStoreClick = onAppStoreClick
+        )
+        Content()
+        Outro(
+            screenWidth = screenWidth,
+            screenHeight = screenHeight,
+            onPlayStoreClick = onPlayStoreClick,
+            onAppStoreClick = onAppStoreClick
+        )
     }
 }
 
@@ -78,6 +109,7 @@ private fun Content(
 ) {
     Introduce()
     Column(modifier.fillMaxWidth().background(Color(0xFFF9F9F9))) {
+
         Spacer(modifier = modifier.height(25.dp))
         Text(
             "홈 - 청년정책", style = fontFamilyMobile.subtitle1,
@@ -206,6 +238,8 @@ private fun Outro(
     modifier: Modifier = Modifier,
     screenWidth: Dp,
     screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
 ) {
     val lineHeightDp: Dp = with(LocalDensity.current) {
         fontFamilyMobile.button.lineHeight.toDp()
@@ -220,7 +254,7 @@ private fun Outro(
                     Color(0xFFC7B5F1),
                     Color(0xFFB99BEC),
 
-                ),
+                    ),
             ),
         ),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -257,7 +291,7 @@ private fun Outro(
             Row {
                 TextButton(
                     onClick = {
-                        window.open("https://play.google.com/store/apps/details?id=com.withpeace.withpeace")
+                        onPlayStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -279,7 +313,7 @@ private fun Outro(
                 Spacer(modifier.width(16.dp))
                 TextButton(
                     onClick = {
-                        window.open("https://apps.apple.com/kr/app/%EC%B2%AD%ED%95%98/id6504498223")
+                        onAppStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -308,6 +342,8 @@ private fun Intro(
     modifier: Modifier = Modifier,
     screenWidth: Dp,
     screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
 ) {
     val lineHeightDp: Dp = with(LocalDensity.current) {
         fontFamilyMobile.button.lineHeight.toDp()
@@ -358,7 +394,7 @@ private fun Intro(
             Row {
                 TextButton(
                     onClick = {
-                        window.open("https://play.google.com/store/apps/details?id=com.withpeace.withpeace")
+                        onPlayStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -380,7 +416,7 @@ private fun Intro(
                 Spacer(modifier.width(16.dp))
                 TextButton(
                     onClick = {
-                        window.open("https://apps.apple.com/kr/app/%EC%B2%AD%ED%95%98/id6504498223")
+                        onAppStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),

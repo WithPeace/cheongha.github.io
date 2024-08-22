@@ -1,5 +1,3 @@
-package com.cheongha.cheongha_landing
-
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -49,22 +47,34 @@ import cheongha_landing.composeapp.generated.resources.playstore_svgrepo_com
 import cheongha_landing.composeapp.generated.resources.post_category
 import cheongha_landing.composeapp.generated.resources.post_detail
 import cheongha_landing.composeapp.generated.resources.service_logo
-import kotlinx.browser.window
+import com.cheongha.cheongha_landing.fontFamily
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun LandingForWeb(
     scrollState: ScrollState,
     screenWidth: Dp,
-    screenHeight: Dp
+    screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth().verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Intro(screenWidth = screenWidth, screenHeight = screenHeight)
+        Intro(
+            screenWidth = screenWidth,
+            screenHeight = screenHeight,
+            onPlayStoreClick = onPlayStoreClick,
+            onAppStoreClick = onAppStoreClick
+        )
         Content()
-        Outro(screenWidth = screenWidth, screenHeight = screenHeight)
+        Outro(
+            screenWidth = screenWidth,
+            screenHeight = screenHeight,
+            onPlayStoreClick = onPlayStoreClick,
+            onAppStoreClick = onAppStoreClick
+        )
     }
 }
 
@@ -73,6 +83,8 @@ private fun Intro(
     modifier: Modifier = Modifier,
     screenWidth: Dp,
     screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
 ) {
     val lineHeightDp: Dp = with(LocalDensity.current) {
         fontFamily.button.lineHeight.toDp()
@@ -121,7 +133,7 @@ private fun Intro(
             Row {
                 TextButton(
                     onClick = {
-                        window.open("https://play.google.com/store/apps/details?id=com.withpeace.withpeace")
+                        onPlayStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -143,7 +155,7 @@ private fun Intro(
                 Spacer(modifier.width(16.dp))
                 TextButton(
                     onClick = {
-                        window.open("https://apps.apple.com/kr/app/%EC%B2%AD%ED%95%98/id6504498223")
+                        onAppStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -334,7 +346,7 @@ private fun HomeDescription(
 
 @Composable
 private fun Introduce(
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Spacer(modifier.height(193.dp))
@@ -386,6 +398,8 @@ private fun Outro(
     modifier: Modifier = Modifier,
     screenWidth: Dp,
     screenHeight: Dp,
+    onPlayStoreClick: () -> Unit,
+    onAppStoreClick: () -> Unit,
 ) {
     val lineHeightDp: Dp = with(LocalDensity.current) {
         fontFamily.button.lineHeight.toDp()
@@ -434,7 +448,7 @@ private fun Outro(
             Row(modifier = modifier) {
                 TextButton(
                     onClick = {
-                        window.open("https://play.google.com/store/apps/details?id=com.withpeace.withpeace")
+                        onPlayStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),
@@ -458,7 +472,7 @@ private fun Outro(
                 Spacer(modifier.width(16.dp))
                 TextButton(
                     onClick = {
-                        window.open("https://apps.apple.com/kr/app/%EC%B2%AD%ED%95%98/id6504498223")
+                        onAppStoreClick()
                     },
                     modifier = modifier.clip(RoundedCornerShape(5.dp))
                         .background(Color(0xFF9A70E2)),

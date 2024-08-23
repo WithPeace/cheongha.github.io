@@ -1,5 +1,5 @@
 name: Publish Application on GitHub Pages
-on: [push]
+on: [push, pull_request]
 jobs:
   # Build job
   build:
@@ -9,7 +9,7 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v2
       with:
-        distribution: 'cheongha-landing'
+        distribution: 'adopt'
         java-version: '11'
 
     - name: Checkout code

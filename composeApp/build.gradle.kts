@@ -22,13 +22,6 @@ kotlin {
         browser {
             commonWebpackConfig {
                 outputFileName = "kotlin-app-js.js"
-                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.rootDir.path)
-                        add(project.projectDir.path)
-                    }
-                }
             }
         }
     }

@@ -10,20 +10,12 @@ plugins {
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
+        browser {}
         binaries.executable()
-        browser {
-            commonWebpackConfig {
-                outputFileName = "kotlin-app-wasm-js.js"
-            }
-        }
     }
     js {
+        browser {}
         binaries.executable()
-        browser {
-            commonWebpackConfig {
-                outputFileName = "kotlin-app-js.js"
-            }
-        }
     }
     sourceSets {
         val commonMain by getting {

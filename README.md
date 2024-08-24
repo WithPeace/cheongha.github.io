@@ -1,4 +1,4 @@
-# Cheongha landing page made by compose multiplatform
+# Cheongha landing page made using compose multiplatform
 
 ### [Landing Page](https://withpeace.github.io/cheongha.github.io/)
 
